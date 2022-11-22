@@ -119,7 +119,7 @@ equivalent to '[abc]'.
 
 A letter or letter range usually represents a single letter, but that can be modified by following the latter or letter range with a *count specifier*:
 
-- + means one or more
+- \+ means one or more
 - \* means zero or more
 - ? means 0 or 1
 - @n means n (e.g. 'O@3' is the same as 'OOO')
