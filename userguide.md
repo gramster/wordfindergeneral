@@ -175,8 +175,8 @@ match problems typical in word puzzles.
 
 The basic concept is not too difficult: we try to find words that match a 
 regular-expression-like template, using only letters drawn from one of two pools: 
-a pool of letters that *must all* be used and a pool of letters that 
-*may optionally* be used. The template itself may contain some pre-populated 
+a pool of letters that *must all* be used (the *mandatory pool*) and a pool of letters that 
+*may optionally* be used (the *optional pool*). The template itself may contain some pre-populated 
 letters already, so only some positions need to be completed from the pools.
 
 To specify the template:
@@ -194,9 +194,10 @@ Instead of letters, you can use letter ranges, surrounded by square brackets. Fo
 - \[a-e\] - is the same as \[abcde\]
 - \[^AEIOU\] - ^ inverts a range, so this represents a consonant
 
-Once again, upper-case letters don't come from the pools. You can't mix and match
-pool and non-pool letters in a letter range; to address this we use the convention that the case of the first letter in the range determines the usage; thus '\[Abc\]' is equivalent to '\[ABC\]' and '\[aBC\]' is
-equivalent to '\[abc\]'.
+Once again, upper-case letters in the template don't come from the pools; only lower case letters/ranges and '.'.
+This means you can't mix and match pool and non-pool letters in a letter range; to address this we
+use the convention that the case of the first letter in a range in the template determines the usage;
+thus '\[Abc\]' is equivalent to '\[ABC\]' and '\[aBC\]' is equivalent to '\[abc\]'.
 
 A letter or letter range usually represents a single letter, but that can be modified by following the latter or letter range with a *count specifier*:
 
@@ -205,8 +206,8 @@ A letter or letter range usually represents a single letter, but that can be mod
 - ? means 0 or 1
 - @n means n (e.g. 'O@3' is the same as 'OOO')
 
-Many of the same conventions can be used in the pools, although letter case has no meaning. That is, 
-the pools can include literal letters, letter ranges, '.' (or ':'; both are treated as equivalent to '\[A-Z\]'), and count specifiers. Apart from letter case being significant, a difference between the template and pools is that in the template, order is important, but in the pools it is not.
+Many of the same conventions for specifying letters can be used in the pools, although letter case has no meaning and
+is ignored. The pools can include literal letters, letter ranges, '.' (or ':'; both are treated as equivalent to '\[A-Z\]'), and count specifiers. Apart from letter case being significant, another difference between the template and pools is that in the template, order is important, but in the pools it is not.
 
 You can use the cryptogram restrictions in the template to place alphabetical position constraints on letter
 matches by using '+' or '-' for simple 'additions' and 'subtractions'. For example, to find all three-letter words where the letters are adjacent to each other alphabetically but in reverse order you can use ':1:1-1:1-2'.
